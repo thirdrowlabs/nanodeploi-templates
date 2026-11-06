@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo 01 · Static HTML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Static HTML is being served</h1>
+        <p>This page is a plain file served by Nginx. No build step, no runtime.</p>
+        <ul>
+            <li><a href="about.html">A second page</a> (multi-page routing)</li>
+            <li><a href="health.json">health.json</a> (used by the automated tests)</li>
+            <li><a href="missing-page">A missing page</a> (should return 404)</li>
+        </ul>
+    </main>
+</body>
+</html>
