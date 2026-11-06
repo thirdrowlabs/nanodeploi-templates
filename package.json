@@ -1,0 +1,7 @@
+{
+    "name": "demo-static-build",
+    "private": true,
+    "scripts": {
+        "build": "node build.mjs"
+    }
+}
