@@ -20,6 +20,11 @@ function env_value(string $key, string $default = ''): string
 
 function db(): PDO
 {
+    static $pdo = null;
+    if ($pdo !== null) {
+        return $pdo;
+    }
+
     $dsn = sprintf(
         'mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
         env_value('DB_HOST', 'mysql'),
@@ -29,9 +34,18 @@ function db(): PDO
 
     $pdo = new PDO($dsn, env_value('DB_USERNAME', 'app'), env_value('DB_PASSWORD'), [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
         PDO::ATTR_TIMEOUT => 3,
     ]);
-    $pdo->exec('CREATE TABLE IF NOT EXISTS visits (id INT AUTO_INCREMENT PRIMARY KEY, visited_at DATETIME NOT NULL)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS tasks (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(200) NOT NULL,
+        notes TEXT NULL,
+        done TINYINT(1) NOT NULL DEFAULT 0,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL
+    ) CHARACTER SET utf8mb4');
 
     return $pdo;
 }
