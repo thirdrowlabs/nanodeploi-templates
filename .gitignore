@@ -1,0 +1,4 @@
+node_modules
+dist
+# The root .gitignore drops lockfiles; this demo needs one for `npm ci` on deploy.
+!package-lock.json
